@@ -4,7 +4,7 @@ import React from "react";
 const Card = ({ title, subtitle, chapters, items, progress }: any) => {
   const router = useRouter();
   const handleRedirect = () => {
-    router.push("/user/subject");
+    router.push("/user/question");
   };
   return (
     <div className="w-80 p-6 bg-gradient-to-br from-purple-500 to-purple-700 rounded-lg shadow-lg text-white">

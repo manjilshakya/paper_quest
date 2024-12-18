@@ -1,7 +1,8 @@
 import { Button } from "antd";
-
+import logo from "../../../../../../public/image/pq.png";
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
 
 const Navbar = () => {
   return (
@@ -9,7 +10,7 @@ const Navbar = () => {
       <div className="hidden xl:block">
         <div className="flex h-[96px] items-center justify-between px-10">
           <div className="flex-shrink-0 font-bold">
-            {/* <Image src={logo} alt={""} height={50} /> */}
+            <Image src={logo} alt={"logo"} height={40} />
           </div>
           <div className="flex-grow flex justify-center">
             <ul className="flex gap-10 text-[18px] font-medium">

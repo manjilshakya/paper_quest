@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 
 import { MenuUnfoldOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import Image from "next/image";
+import logo from "../../../../../../public/image/pq.png";
+
 const HomeNavbar = () => {
   const router = useRouter();
   // const [open, setOpen] = useState(false);
@@ -13,15 +16,15 @@ const HomeNavbar = () => {
     <>
       <div className="w-full flex justify-between px-6 md:px-20 py-5 bg-[#FCFCFD] drop-shadow-sm">
         <div className="flex gap-[100px] items-center">
-          {/* <Image
+          <Image
             src={logo}
             alt="logo"
             width={185}
             height={42}
             className="cursor-pointer"
             onClick={() => router.push("/home")}
-          /> */}
-          PQ
+          />
+
           <div className="hidden md:block">
             <ul className="flex gap-10 items-center">
               <li>

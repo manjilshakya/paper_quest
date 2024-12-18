@@ -1,5 +1,7 @@
 // import NavLink from "../NavLink"
 
+import Link from "next/link";
+
 const Herosection = () => (
   <section>
     <div className="custom-screen py-28 text-gray-600">
@@ -13,7 +15,7 @@ const Herosection = () => (
         </p>
         <div className="flex items-center justify-center gap-x-3 font-medium text-sm">
           <button className="text-white bg-gray-800 hover:bg-gray-600 active:bg-gray-900 px-5 py-2 rounded-lg">
-            Create Account
+            <Link href={"/Signup"}> Create Account</Link>
           </button>
         </div>
       </div>
