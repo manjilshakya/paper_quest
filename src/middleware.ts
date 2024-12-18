@@ -31,7 +31,7 @@ export async function middleware(request: NextRequest, res: NextResponse) {
         '/user/verify',
         '/user/set-new-password',
         '/user/how-it-works',
-        '/user/planPrice',
+        '/user/question',
         '/user/restaurant_profile'
     ];
     // if (
