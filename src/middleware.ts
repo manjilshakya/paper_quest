@@ -25,7 +25,7 @@ export async function middleware(request: NextRequest, res: NextResponse) {
     const allowedRoutes = [
         '/user',
         '/user/Signup',
-        '/user/forgot-password',
+        '/user/problem',
         '/user/Signin',
         '/user/subject',
         '/user/verify',

@@ -30,6 +30,9 @@ const HomeNavbar = () => {
               <li>
                 <a href="/user">Home</a>
               </li>
+              <li>
+                <a href="/user/problem">Problem</a>
+              </li>
             </ul>
           </div>
         </div>
