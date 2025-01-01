@@ -28,8 +28,8 @@ export async function middleware(request: NextRequest, res: NextResponse) {
         '/user/problem',
         '/user/Signin',
         '/user/subject',
-        '/user/verify',
-        '/user/set-new-password',
+        '/user/payment',
+        '/user/learn',
         '/user/how-it-works',
         '/user/question',
         '/user/restaurant_profile'

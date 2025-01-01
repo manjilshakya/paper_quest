@@ -37,7 +37,7 @@ const HomeNavbar = () => {
           </div>
         </div>
         <div className="hidden md:flex  gap-4 items-center">
-          <Link href="/user/subject" className="mr-11">
+          <Link href="/user/learn" className="mr-11">
             <Button type="primary" className="cursor-pointer min-h-[38px]">
               Learn
             </Button>

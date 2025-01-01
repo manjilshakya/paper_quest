@@ -1,16 +1,48 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Metadata } from "next";
 import Breadcrumb from "../components/Breadcrumbs/Breadcrumb";
 import logo from "../../../../../public/image/pq.png";
-
-export const metadata: Metadata = {
-  title: "Next.js SignIn Page",
-  description: "",
-};
+import { useRouter } from "next/navigation";
+import { Button, message } from "antd";
+import axios from "axios";
 
 const SignIn: React.FC = () => {
+  const router = useRouter();
+
+  // const handleLogin = () => {
+  //   // Perform login logic here
+  //   router.push("/user");
+  // };
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/users/login",
+        {
+          email,
+          password,
+        }
+      );
+      if (response.status === 200) {
+        router.push("/user");
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.error("Axios error:", error.response?.data || error.message);
+        alert(error.response?.data?.message || "Something went wrong!");
+      } else {
+        console.error("Unexpected error:", error);
+        alert("An unexpected error occurred.");
+      }
+    }
+  };
+
   return (
     <div className=" flex flex-col items-center justify-center mt-[200px]">
       {/* <DefaultLayout> */}
@@ -31,8 +63,7 @@ const SignIn: React.FC = () => {
               </Link>
 
               <p className="2xl:px-20">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                suspendisse.
+                Paper Quest to enhance and grow your knowledge.
               </p>
 
               <span className="mt-15 inline-block mt-4">
@@ -174,6 +205,8 @@ const SignIn: React.FC = () => {
                   </label>
                   <div className="relative">
                     <input
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       type="email"
                       placeholder="Enter your email"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
@@ -205,6 +238,8 @@ const SignIn: React.FC = () => {
                   </label>
                   <div className="relative">
                     <input
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       type="password"
                       placeholder="6+ Characters, 1 Capital letter"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
@@ -235,11 +270,17 @@ const SignIn: React.FC = () => {
                 </div>
 
                 <div className="mb-5">
-                  <input
+                  <Button
+                    className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-black transition hover:bg-opacity-90"
+                    onClick={handleLogin}
+                  >
+                    Sign In
+                  </Button>
+                  {/* <input
                     type="submit"
                     value="Sign In"
                     className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-black transition hover:bg-opacity-90"
-                  />
+                  /> */}
                 </div>
 
                 <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
