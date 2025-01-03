@@ -5,7 +5,7 @@ import HomeNavbar from "./components/homeNavbar";
 import CustomerHome from "./home/customer";
 import Learn from "./home/Learn";
 import Modal from "./components/Modal";
-// import RestaurantProfile from "./restaurant_profile/page";
+
 
 const page = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -123,7 +123,6 @@ const page = () => {
       <CustomerHome />
       <Learn />
 
-      {/* <RestaurantProfile /> */}
     </div>
   );
 };
