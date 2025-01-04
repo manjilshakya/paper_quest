@@ -84,8 +84,8 @@ const page = () => {
               className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Select an option</option>
-              <option value="arts">Arts</option>
-              <option value="science">Science</option>
+              <option value="arts">BICT</option>
+              <option value="science">MBA</option>
             </select>
           </div>
 
@@ -95,15 +95,21 @@ const page = () => {
               className="block text-gray-700 font-medium mb-2"
               htmlFor="optional-subject"
             >
-              Optional Subject
+              Semester
             </label>
             <select
               id="optional-subject"
               className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Select an option</option>
-              <option value="computer">Computer</option>
-              <option value="optional-math">Optional Math</option>
+              <option value="first">First</option>
+              <option value="Second">Second</option>
+              <option value="third">Third</option>
+              <option value="fourth">Fourth</option>
+              <option value="fifth">Fifth</option>
+              <option value="sixth">Sixth</option>
+              <option value="seventh">Seventh</option>
+              <option value="eight">Eight</option>
             </select>
           </div>
 
