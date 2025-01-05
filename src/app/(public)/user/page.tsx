@@ -5,15 +5,27 @@ import HomeNavbar from "./components/homeNavbar";
 import CustomerHome from "./home/customer";
 import Learn from "./home/Learn";
 import Modal from "./components/Modal";
+import useTokenStore from "@/app/tokenstore";
+import { useRouter } from "next/navigation";
 
 
 const page = () => {
   const [isModalOpen, setModalOpen] = useState(false);
 
+  const router = useRouter();
+
   useEffect(() => {
     // Open the modal when the page loads
     setModalOpen(true);
   }, []);
+
+  const token = useTokenStore((state) => state.token);
+
+  if (token === "") {
+    console.log(token);
+    console.log("I am here");
+    router.push("/");
+  }
 
   const closeModal = () => setModalOpen(false);
   return (
