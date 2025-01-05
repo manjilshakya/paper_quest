@@ -1,16 +1,53 @@
-import React from "react";
+"use client"
+
+import React, {useState} from "react";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../../../../public/image/pq.png";
 import { Metadata } from "next";
+import {useRouter} from "next/navigation";
+import axios from "axios";
 
-export const metadata: Metadata = {
-  title: "Next.js SignUp Page | TailAdmin - Next.js Dashboard Template",
-  description: "This is Next.js SignUp Page TailAdmin Dashboard Template",
-  // other metadata
-};
 
 const SignUp: React.FC = () => {
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const[retypePassword, setRetypePassword] = useState("");
+  const[passwordMatch, setPasswordMatch] = useState(true);
+
+  const handleSignup = async () => {
+    if (password !== retypePassword) {
+      setPasswordMatch(false);
+      alert("Passwords do not match");
+      return;
+    }
+    try {
+      const response = await axios.post(
+          "http://localhost:5030/api/register",
+          {
+            name,
+            email,
+            password
+
+          }
+      );
+      if (response.status === 200) {
+        router.push("/user/Signin");
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.error("Axios error:", error.response?.data || error.message);
+        alert(error.response?.data?.message || "Something went wrong!");
+      } else {
+        console.error("Unexpected error:", error);
+        alert("An unexpected error occurred.");
+      }
+    }
+  };
   return (
     <div className=" flex flex-col items-center justify-center mt-[100px]">
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-4">
@@ -170,6 +207,8 @@ const SignUp: React.FC = () => {
                   </label>
                   <div className="relative">
                     <input
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                       type="text"
                       placeholder="Enter your full name"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
@@ -205,6 +244,8 @@ const SignUp: React.FC = () => {
                   </label>
                   <div className="relative">
                     <input
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                       type="email"
                       placeholder="Enter your email"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
@@ -236,6 +277,8 @@ const SignUp: React.FC = () => {
                   </label>
                   <div className="relative">
                     <input
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                       type="password"
                       placeholder="Enter your password"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
@@ -271,6 +314,8 @@ const SignUp: React.FC = () => {
                   </label>
                   <div className="relative">
                     <input
+                        value={retypePassword}
+                        onChange={(e) => setRetypePassword(e.target.value)}
                       type="password"
                       placeholder="Re-enter your password"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
@@ -302,6 +347,7 @@ const SignUp: React.FC = () => {
 
                 <div className="mb-5">
                   <input
+                      onClick={handleSignup}
                     type="submit"
                     value="Create account"
                     className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-black transition hover:bg-opacity-90"
