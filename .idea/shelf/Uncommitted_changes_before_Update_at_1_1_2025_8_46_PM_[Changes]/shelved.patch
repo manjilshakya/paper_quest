@@ -1,0 +1,27 @@
+Index: src/app/(public)/user/page.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\"use client\";\r\n\r\nimport React from \"react\";\r\nimport HomeNavbar from \"./components/homeNavbar\";\r\nimport CustomerHome from \"./home/customer\";\r\nimport Learn from \"./home/Learn\";\r\n// import RestaurantProfile from \"./restaurant_profile/page\";\r\n\r\nconst page = () => {\r\n  return (\r\n    <div>\r\n      <HomeNavbar />\r\n      <CustomerHome />\r\n      <Learn />\r\n\r\n      {/* <RestaurantProfile /> */}\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default page;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/app/(public)/user/page.tsx b/src/app/(public)/user/page.tsx
+--- a/src/app/(public)/user/page.tsx	(revision f73b3ce166637839de12ce8d43eefe3630d81683)
++++ b/src/app/(public)/user/page.tsx	(date 1735466946368)
+@@ -4,7 +4,7 @@
+ import HomeNavbar from "./components/homeNavbar";
+ import CustomerHome from "./home/customer";
+ import Learn from "./home/Learn";
+-// import RestaurantProfile from "./restaurant_profile/page";
++
+ 
+ const page = () => {
+   return (
+@@ -13,7 +13,6 @@
+       <CustomerHome />
+       <Learn />
+ 
+-      {/* <RestaurantProfile /> */}
+     </div>
+   );
+ };
