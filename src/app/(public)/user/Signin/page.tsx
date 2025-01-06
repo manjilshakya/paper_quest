@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import logo from "../../../../../public/image/pq.png";
 import useTokenStore, { useUserDetails } from "@/app/tokenstore";
-import Breadcrumb from "../components/Breadcrumbs/Breadcrumb";
+// import Breadcrumb from "../components/Breadcrumbs/Breadcrumb";
 import { Button, message } from "antd";
 import { useRouter } from "next/navigation";
 import { create } from "zustand";
@@ -15,9 +15,11 @@ import { UserData } from "@/app/Models/Types";
 
 
 const SignIn: React.FC = () => {
+
   const router = useRouter();
   const setToken = useTokenStore((state) => state.setToken);
-  const userDetails = useUserDetails((state) => state.updateUserDetails);
+  const updateUserDetails = useUserDetails((state) => state.updateUserDetails);
+  const isUserDataCompleted = useUserDetails((state) => state.isUserDataComplete);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,9 +43,15 @@ const SignIn: React.FC = () => {
           email: decoded.email,
           userId: decoded.userId,
           name: decoded.name,
-          userType: decoded.usertype,
-          isUserDataComplete: decoded.isUserDataCompleted,
+          userType: decoded.userType,
+          isUserDataComplete: decoded.isUserDataComplete,
         };(decoded);
+
+        updateUserDetails(userDetails);
+        console.log(`${userDetails}`)
+        setTimeout(() => {
+          console.log("Is User Data Complete:", isUserDataCompleted ? "Yes" : "No");
+        }, 100);
       }
       router.push("/user"); 
     },
@@ -60,13 +68,13 @@ const SignIn: React.FC = () => {
     e.preventDefault(); 
     mutation.mutate(); 
 
-    const userDetails = create((set) => ({
-      email: "",
-      userId: 0,
-      name: "",
-      usertype: "",
-      isUserDataCompleted: false
-    }))
+  //   const userDetails = create((set) => ({
+  //     email: "",
+  //     userId: 0,
+  //     name: "",
+  //     usertype: "",
+  //     isUserDataCompleted: false
+  //   }))
   };
 
   return (
