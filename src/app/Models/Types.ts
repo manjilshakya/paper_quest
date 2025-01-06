@@ -3,7 +3,7 @@ export interface UserDetailsState {
     userId: number;
     name: string;
     usertype: string;
-    isUserDataCompleted: boolean;
+    isUserDataComplete: boolean;
     updateUserDetails: (userData: UserData) => void;
     clearUserDetails: () => void;
   }
