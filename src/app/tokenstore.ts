@@ -1,6 +1,6 @@
 ﻿import { devtools, persist } from "zustand/middleware";
 import {create} from "zustand/react";
-import { UserData, userData, UserDetailsState } from "./Models/Types";
+import { UserData, UserDetailsState } from "./Models/Types";
 
 export interface Tokenstore{
     token: string;
@@ -24,14 +24,15 @@ export const useUserDetails = create<UserDetailsState>((set) => ({
     userId: 0,
     name: "",
     usertype: "",
-    isUserDataCompleted: false,
+    isUserDataComplete: false,
     updateUserDetails: (userData: UserData) =>
       set({
         email: userData.email,
         userId: typeof userData.userId === "string" ? parseInt(userData.userId, 10) : userData.userId,
         name: userData.name,
         usertype: userData.userType,
-        isUserDataCompleted: userData.isUserDataComplete === "1" || userData.isUserDataComplete === true,
+
+        isUserDataComplete: userData.isUserDataComplete === "1" || userData.isUserDataComplete === true || userData.isUserDataComplete === "True",
       }),
     clearUserDetails: () =>
       set({
@@ -39,7 +40,7 @@ export const useUserDetails = create<UserDetailsState>((set) => ({
         userId: 0,
         name: "",
         usertype: "",
-        isUserDataCompleted: false,
+        isUserDataComplete: false,
       }),
   }));
 
