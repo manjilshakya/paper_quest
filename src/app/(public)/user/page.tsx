@@ -5,12 +5,15 @@ import HomeNavbar from "./components/homeNavbar";
 import CustomerHome from "./home/customer";
 import Learn from "./home/Learn";
 import Modal from "./components/Modal";
-import useTokenStore from "@/app/tokenstore";
+import useTokenStore, { useUserDetails } from "@/app/tokenstore";
 import { useRouter } from "next/navigation";
 
 
 const page = () => {
+  // debugger;
   const [isModalOpen, setModalOpen] = useState(false);
+
+  const isUserDataCompleted = useUserDetails((state) => state.isUserDataComplete);
 
   const router = useRouter();
 
@@ -26,6 +29,12 @@ const page = () => {
     console.log("I am here");
     router.push("/");
   }
+
+  useEffect(() => {
+    if (isUserDataCompleted) {
+      setModalOpen(false);
+    }
+  }, [isUserDataCompleted]);
 
   const closeModal = () => setModalOpen(false);
   return (
