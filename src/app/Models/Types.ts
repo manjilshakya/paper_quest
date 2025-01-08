@@ -16,3 +16,13 @@ export interface UserDetailsState {
     userType: string;
     isUserDataComplete: boolean | string;
   }
+
+  export interface UserModel{
+
+    userId: string;
+    institutionName: string;
+    grade: string;
+    semester: string;
+    phoneNumber: string;
+    academicBackground: string;
+}
