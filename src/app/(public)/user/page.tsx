@@ -46,6 +46,7 @@ const page = () => {
         if (isUserDataCompleted) {
             setModalOpen(false);
         }
+
     }, [isUserDataCompleted]);
 
     const mutation = useMutation({
@@ -153,8 +154,8 @@ const page = () => {
                             ref={academicBackgroundRef}
                         >
                             <option value="">Select an option</option>
-                            <option value="arts">BICT</option>
-                            <option value="science">MBA</option>
+                            <option value="BICT">BICT</option>
+                            <option value="MBA">MBA</option>
                         </select>
                     </div>
 
