@@ -101,7 +101,6 @@ const Question = () => {
             <button
               onClick={downloadAsPDF}
               className="bg-slate-400 p-4 rounded-lg text-white"
-              // style={{ marginTop: "20px", padding: "10px 20px" }}
             >
               Download as PDF
             </button>
