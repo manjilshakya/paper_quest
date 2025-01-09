@@ -7,6 +7,7 @@ import { MenuUnfoldOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../../../../../public/image/pq.png";
+import avatar from "@/../../public/image/Avatar.png";
 
 const HomeNavbar = () => {
   const router = useRouter();
@@ -42,7 +43,11 @@ const HomeNavbar = () => {
               Learn
             </Button>
           </Link>
-          <div className="flex justify-center items-center rounded-full bg-[#F2F4F7] w-[48px] h-[48px] cursor-pointer relative"></div>
+          <div className="flex justify-center items-center rounded-full bg-[#F2F4F7] w-[48px] h-[48px] cursor-pointer relative">
+            <Link href={"/user/profile"}>
+              <Image src={avatar} alt={"avatar"} />
+            </Link>
+          </div>
 
           <Link href="/user/login">
             <Button type="primary" className="cursor-pointer min-h-[38px]">

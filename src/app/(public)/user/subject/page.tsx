@@ -147,6 +147,11 @@ const page = () => {
                     >
                       Flip to Back
                     </button>
+                    <div className="flex gap-2 mt-5">
+                      <div>1st</div>
+                      <div>2nd</div>
+                      <div>3rd</div>
+                    </div>
                   </div>
 
                   {/* Back Side */}

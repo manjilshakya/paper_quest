@@ -21,7 +21,7 @@ const logos = [
 ];
 
 const Paper = () => (
-  <div className="my-10">
+  <div className="my-10" id="services">
     <div className="custom-screen">
       <h2 className="font-semibold text-sm text-gray-600 text-center">
         Paper available with us!

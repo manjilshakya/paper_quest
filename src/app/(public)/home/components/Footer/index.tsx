@@ -37,7 +37,7 @@ const Footer = () => {
               or looking to review previous questions, Paper Quest is here to
               make your study journey easier and more efficient.{" "}
             </p>
-            <div className="flex gap-4 items-center mt-4">
+            {/* <div className="flex gap-4 items-center mt-4">
               <Link href="" target="_blank">
                 <FacebookIcon />
               </Link>
@@ -47,7 +47,7 @@ const Footer = () => {
               <Link href="" target="_blank">
                 <TwitterIcon />
               </Link>
-            </div>
+            </div> */}
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-[80px] mt-8 md:mt-0">
             {footerLinks?.map(({ title, children }) => (

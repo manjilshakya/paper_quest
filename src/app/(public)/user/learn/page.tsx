@@ -7,6 +7,7 @@ import Image from "next/image";
 import PQ from "../../../../../public/image/Paperbanner.png";
 import ReactCardFlip from "react-card-flip";
 import Card from "./components/Card";
+import Chats from "./components/chats";
 
 const page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -204,6 +205,10 @@ const page = () => {
           <Card />
           <Card />
         </div>
+      </div>
+      <div className="flex gap-5">
+        <Chat />
+        <Chats />
       </div>
     </div>
   );

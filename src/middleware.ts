@@ -32,7 +32,7 @@ export async function middleware(request: NextRequest, res: NextResponse) {
         '/user/learn',
         '/user/how-it-works',
         '/user/question',
-        '/user/restaurant_profile'
+        '/user/profile'
     ];
     // if (
     //     request.nextUrl.pathname.startsWith('/home') &&
