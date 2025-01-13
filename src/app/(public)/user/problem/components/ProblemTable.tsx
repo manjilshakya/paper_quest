@@ -37,9 +37,14 @@ const ProblemTable = () => {
           <option value="" disabled selected hidden>
             Exam Type
           </option>
-          <option value="SEE">SEE</option>
-          <option value="BLE">BLE</option>
-          <option value="NEB">NEB</option>
+          <option value="first">First</option>
+          <option value="Second">Second</option>
+          <option value="third">Third</option>
+          <option value="fourth">Fourth</option>
+          <option value="fifth">Fifth</option>
+          <option value="sixth">Sixth</option>
+          <option value="seventh">Seventh</option>
+          <option value="eight">Eight</option>
         </select>
 
         <select className="border border-gray-300 rounded px-4 py-2 text-sm">

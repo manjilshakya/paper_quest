@@ -5,15 +5,21 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../../../../public/image/pq.png";
-import useTokenStore from "@/app/tokenstore";
-import Breadcrumb from "../components/Breadcrumbs/Breadcrumb";
+import useTokenStore, { useUserDetails } from "@/app/tokenstore";
+// import Breadcrumb from "../components/Breadcrumbs/Breadcrumb";
 import { Button, message } from "antd";
 import { useRouter } from "next/navigation";
+import { create } from "zustand";
+import jwt from "jsonwebtoken";
+import { UserData } from "@/app/Models/Types";
 
 
 const SignIn: React.FC = () => {
+
   const router = useRouter();
   const setToken = useTokenStore((state) => state.setToken);
+  const updateUserDetails = useUserDetails((state) => state.updateUserDetails);
+  const isUserDataCompleted = useUserDetails((state) => state.isUserDataComplete);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,6 +35,24 @@ const SignIn: React.FC = () => {
     onSuccess: (response) => {
       setToken(response.data.accessToken); 
       console.log(response.data.accessToken);
+
+      const decoded = jwt.decode(response.data.accessToken);
+
+      if (decoded && typeof decoded === "object") {
+        const userDetails: UserData = {
+          email: decoded.email,
+          userId: decoded.userId,
+          name: decoded.name,
+          userType: decoded.userType,
+          isUserDataComplete: decoded.isUserDataComplete,
+        };(decoded);
+
+        updateUserDetails(userDetails);
+        console.log(`${userDetails}`)
+        setTimeout(() => {
+          console.log("Is User Data Complete:", isUserDataCompleted ? "Yes" : "No");
+        }, 100);
+      }
       router.push("/user"); 
     },
     onError: (error) => {
@@ -43,6 +67,14 @@ const SignIn: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault(); 
     mutation.mutate(); 
+
+  //   const userDetails = create((set) => ({
+  //     email: "",
+  //     userId: 0,
+  //     name: "",
+  //     usertype: "",
+  //     isUserDataCompleted: false
+  //   }))
   };
 
   return (
