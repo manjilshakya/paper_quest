@@ -26,3 +26,10 @@ export interface UserDetailsState {
     phoneNumber: string;
     academicBackground: string;
 }
+
+export interface LearningCard {
+  pastPaperId: string;
+  title: string;
+  year: string;
+  subject: string;
+}
