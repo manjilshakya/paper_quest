@@ -3,8 +3,12 @@ import axios from "axios";
 import jsPDF from "jspdf";
 import React, { useEffect, useState } from "react";
 import Chats from "../learn/components/chats";
+import {usePastPaperStore} from "@/app/tokenstore";
 
 const Question = () => {
+  const { pastPapers } = usePastPaperStore();
+
+
   const questions = [
     {
       id: 1,
@@ -42,8 +46,8 @@ const Question = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * questions.length);
-    setCurrentQuestion(questions[randomIndex]);
+    const randomIndex = Math.floor(Math.random() * pastPapers.length);
+    setCurrentQuestion(pastPapers[randomIndex]);
   }, []);
 
   const toggleAnswer = (id: number) => {
@@ -52,7 +56,7 @@ const Question = () => {
 
   const downloadAsPDF = () => {
     const doc = new jsPDF();
-    questions.forEach((qa, index) => {
+    pastPapers.forEach((qa, index) => {
       doc.text(`${index + 1}. ${qa.question}`, 10, 10 + index * 20);
       doc.text(`Answer: ${qa.answer}`, 10, 20 + index * 20);
     });
@@ -60,8 +64,8 @@ const Question = () => {
   };
 
   const handleGenerateNew = () => {
-    const randomIndex = Math.floor(Math.random() * questions.length);
-    setCurrentQuestion(questions[randomIndex]);
+    const randomIndex = Math.floor(Math.random() * pastPapers.length);
+    setCurrentQuestion(pastPapers[randomIndex]);
   };
   const togglePopup = async () => {
     setIsPopupVisible((prev) => !prev);
