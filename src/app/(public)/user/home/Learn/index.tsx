@@ -16,7 +16,8 @@ const Learn: React.FC<LearningCardState> = ({ cards }): JSX.Element => {
       <div className="flex flex-wrap gap-4 justify-center">
         {displayedCourses.map((courseItem) => (
           <Card
-            key={courseItem.pastPaperId} // Unique key for React rendering
+            key={courseItem.pastPaperId}
+            pastPaperId={courseItem.pastPaperId}
             title={courseItem?.title || "Untitled"}
             subtitle={courseItem?.subject || "No Subject"}
             chapters={`Year: ${courseItem?.year || "N/A"}`}
