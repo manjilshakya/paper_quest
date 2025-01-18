@@ -64,3 +64,15 @@ export interface LearningDeck {
     title: string;
     totalquestions: number;
 }
+
+export interface SpacedRepetitionCard {
+    question_number : number;
+    question: string;
+    answer: string;
+    score: number;
+}
+
+export interface SpacedRepetitionCardState {
+    Cards: SpacedRepetitionCard[];
+    setCards: (data: SpacedRepetitionCard[]) => void;
+}
