@@ -1,6 +1,8 @@
 "use client";
+import axios from "axios";
 import jsPDF from "jspdf";
 import React, { useEffect, useState } from "react";
+import Chats from "../learn/components/chats";
 
 const Question = () => {
   const questions = [
@@ -37,6 +39,7 @@ const Question = () => {
     {}
   );
   const [currentQuestion, setCurrentQuestion] = useState<any>(null);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * questions.length);
@@ -60,6 +63,20 @@ const Question = () => {
     const randomIndex = Math.floor(Math.random() * questions.length);
     setCurrentQuestion(questions[randomIndex]);
   };
+  const togglePopup = async () => {
+    setIsPopupVisible((prev) => !prev);
+    console.log("Popup toggled!");
+
+    try {
+    
+      const response = await axios.post("api", {
+        key: "value", 
+      });
+      console.log("API Response:", response.data);
+    } catch (error) {
+      console.error("Error hitting API:", error);
+    }
+  };
 
   return (
     <div className="flex flex-col justify-center px-[128px] mt-6">
@@ -82,6 +99,12 @@ const Question = () => {
       </div>
       <div>
         <div className=" mt-[64px] p-4 border-gray border-2 rounded-lg w-full shadow-lg">
+        <button
+                onClick={togglePopup}
+                className="bg-gray-500 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-700 transition absolute right-[150px] "
+              >
+                +
+              </button>
           <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
             <h1 className="text-[32px] font-semibold flex justify-center">
               Question paper
@@ -108,6 +131,20 @@ const Question = () => {
           </div>
         </div>
       </div>
+      {isPopupVisible && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-80 text-center">
+            <h2 className="text-md font-semibold mb-4">Added to your learning deck</h2>
+            <button
+              onClick={togglePopup}
+              className="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+      {/* <Chats /> */}
     </div>
   );
 };

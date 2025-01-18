@@ -33,3 +33,7 @@ export interface LearningCard {
   year: string;
   subject: string;
 }
+
+export interface LearningCardState {
+  cards: LearningCard[];
+}

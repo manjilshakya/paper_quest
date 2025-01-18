@@ -7,20 +7,20 @@ const Card = ({ title, subtitle, chapters, items, progress }: any) => {
     router.push("/user/question");
   };
   return (
-    <div className="w-80 p-6 bg-gradient-to-br from-purple-500 to-purple-700 rounded-lg shadow-lg text-white">
+    <div className="w-[300px] p-3 bg-gradient-to-br from-purple-500 to-purple-700 rounded-lg shadow-lg text-white">
       <h2 className="text-lg font-semibold">{title}</h2>
       <h1 className="mt-4 text-2xl font-bold">{subtitle}</h1>
       <div className="flex items-center mt-6 space-x-4">
         <div className="text-center">
-          <p className="text-3xl font-semibold">{chapters}</p>
+          <p className="text-xl font-semibold">{chapters}</p>
           <p className="text-sm">Chapters</p>
         </div>
         <div className="text-center">
-          <p className="text-3xl font-semibold">{items}</p>
+          <p className="text-xl font-semibold">{items}</p>
           <p className="text-sm">Items</p>
         </div>
         <div className="text-center">
-          <p className="text-3xl font-semibold">{progress}</p>
+          <p className="text-xl font-semibold">{progress}</p>
           <p className="text-sm">Progress</p>
         </div>
       </div>

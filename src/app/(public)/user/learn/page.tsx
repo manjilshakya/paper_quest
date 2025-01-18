@@ -206,10 +206,10 @@ const page = () => {
           <Card />
         </div>
       </div>
-      <div className="flex gap-5">
+      {/* <div className="flex gap-5">
         <Chat />
         <Chats />
-      </div>
+      </div> */}
     </div>
   );
 };

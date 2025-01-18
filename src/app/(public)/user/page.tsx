@@ -7,12 +7,13 @@ import Learn from "./home/Learn";
 import Modal from "./components/Modal";
 import useTokenStore, {useUserDetails} from "@/app/tokenstore";
 import {useRouter} from "next/navigation";
-import {useMutation} from "@tanstack/react-query";
+import {useMutation, useQuery} from "@tanstack/react-query";
 import axios from "axios";
-import {UserModel} from "@/app/Models/Types";
+import {LearningCard, LearningCardState, UserModel} from "@/app/Models/Types";
 
 
 const page = () => {
+    const [cards, setCards] = useState([]);
     // debugger;
     const [isModalOpen, setModalOpen] = useState(false);
 
@@ -36,16 +37,102 @@ const page = () => {
 
     const token = useTokenStore((state) => state.token);
 
-    if (token === "") {
-        console.log(token);
-        console.log("I am here");
-        router.push("/");
-    }
+    // if (token === "") {
+    //     console.log(token);
+    //     console.log("I am here");
+    //     router.push("/");
+    // }
+
+    // const fetchLearnCards = async () => {
+    //     try{
+    //     const response = await axios.get<LearningCard[]>(`http://localhost:5030/api/pastpaper/dynamic-modal/${userId}`);
+    //     return response.data;
+
+    //     }catch (e) {
+    //         console.log(e);
+    //     }
+    // }
+    // const fetchLearnCards = async () => {
+    //     try {
+    //         const response = await axios.get<LearningCard[]>(
+    //             `http://localhost:5030/api/pastpaper/dynamic-modal/${userId}`
+    //         );
+            
+    //         // Transforming the response data
+    //         const learnCards = response.data.map(item => ({
+    //             id: item.pastPaperId,
+    //             title: item.title,
+    //             year: item.year,
+    //             subject: item.subject
+    //         }));
+
+    //         return learnCards;
+    //     } catch (e) {
+    //         console.error('Error fetching learning cards:', e);
+    //     }
+    // };
+
+    // const fetchLearnCards = async () => {
+    //     try {
+    //       const response = await axios.get(`http://localhost:5030/api/pastpaper/dynamic-modal/${userId}`);
+    //       console.log('Data received:', response.data);
+    //     } catch (error :any) {
+    //       console.error('Error fetching data:', error.response ? error.response.data : error.message);
+    //     }
+    //   }
+
+    const fetchLearnCards = async () => {
+        try {
+          const response = await axios.get(`http://localhost:5030/api/pastpaper/dynamic-modal/2`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          });
+          setCards(response.data); 
+          console.log("response",response.data);// Update state with fetched data
+        } catch (error: any) {
+          console.error(
+            "Error fetching data:",
+            error.response ? error.response.data : error.message
+          );
+        }
+      };
+
+    // useEffect(() => {
+    //     const fetchLearnCards = async () => {
+    //       try {
+    //         const token = useTokenStore((state) => state.token); 
+    //         const response = await axios.get(`http://localhost:5030/api/pastpaper/dynamic-modal/2`, {
+    //           headers: {
+    //             Authorization: `Bearer ${token}`,
+    //             "Content-Type": "application/json",
+    //           },
+    //         });
+    //         setCards(response.data); 
+    //         console.log("response",response.data);// Update state with fetched data
+    //       } catch (error: any) {
+    //         console.error(
+    //           "Error fetching data:",
+    //           error.response ? error.response.data : error.message
+    //         );
+    //       }
+    //     };
+      
+    //     fetchLearnCards();
+    //   }, []);
+      
+
+// console.log(cards,'cyhgsa');
+    // const {data, isLoading, isError} = useQuery({ queryKey: ['learnCards'], queryFn: fetchLearnCards, enabled: isUserDataCompleted});
 
     useEffect(() => {
-        if (isUserDataCompleted) {
-            setModalOpen(false);
-        }
+            if (isUserDataCompleted) {
+                setModalOpen(false);
+                fetchLearnCards();
+            }
+
+        fetchLearnCards();
 
     }, [isUserDataCompleted]);
 
@@ -61,6 +148,7 @@ const page = () => {
       },
       onSuccess: (data) => {
         console.log('data submitted successfully',data);
+     
       },
       onError: (error) => {
         console.log('error submitting data', error);
@@ -70,15 +158,16 @@ const page = () => {
     const handleSubmit = (e : FormEvent) => {
       e.preventDefault();
       const data: UserModel = {
-        userId: userId.toString(), // Assuming userId is already a number
+        userId: userId.toString(), 
         institutionName: institutionRef.current?.value || '',
-        grade: '4', // Grade is hardcoded to 4 as per your example
+        grade: '4', // Grade is hardcoded to 4 
         semester: semesterRef.current?.value || '',
         phoneNumber: phoneNumberRef.current?.value || '',
         academicBackground: academicBackgroundRef.current?.value || '',
       };
 
       mutation.mutate(data);
+      fetchLearnCards();
     }
 
     const closeModal = () => setModalOpen(false);
@@ -173,14 +262,14 @@ const page = () => {
                             ref={semesterRef}
                         >
                             <option value="">Select an option</option>
-                            <option value="first">First</option>
-                            <option value="Second">Second</option>
-                            <option value="third">Third</option>
-                            <option value="fourth">Fourth</option>
-                            <option value="fifth">Fifth</option>
-                            <option value="sixth">Sixth</option>
-                            <option value="seventh">Seventh</option>
-                            <option value="eight">Eight</option>
+                            <option value="1">First</option>
+                            <option value="2">Second</option>
+                            <option value="3">Third</option>
+                            <option value="4">Fourth</option>
+                            <option value="5">Fifth</option>
+                            <option value="6">Sixth</option>
+                            <option value="7">Seventh</option>
+                            <option value="8">Eight</option>
                         </select>
                     </div>
 
@@ -201,7 +290,11 @@ const page = () => {
             </Modal>
             <HomeNavbar/>
             <CustomerHome/>
-            <Learn/>
+            {isModalOpen ? "Loading..." :
+            <Learn cards={cards} ></Learn> 
+        }
+
+            {/* <Learn cards={data || []}></Learn> */}
 
         </div>
     );
