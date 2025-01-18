@@ -43,44 +43,6 @@ const page = () => {
     //     router.push("/");
     // }
 
-    // const fetchLearnCards = async () => {
-    //     try{
-    //     const response = await axios.get<LearningCard[]>(`http://localhost:5030/api/pastpaper/dynamic-modal/${userId}`);
-    //     return response.data;
-
-    //     }catch (e) {
-    //         console.log(e);
-    //     }
-    // }
-    // const fetchLearnCards = async () => {
-    //     try {
-    //         const response = await axios.get<LearningCard[]>(
-    //             `http://localhost:5030/api/pastpaper/dynamic-modal/${userId}`
-    //         );
-            
-    //         // Transforming the response data
-    //         const learnCards = response.data.map(item => ({
-    //             id: item.pastPaperId,
-    //             title: item.title,
-    //             year: item.year,
-    //             subject: item.subject
-    //         }));
-
-    //         return learnCards;
-    //     } catch (e) {
-    //         console.error('Error fetching learning cards:', e);
-    //     }
-    // };
-
-    // const fetchLearnCards = async () => {
-    //     try {
-    //       const response = await axios.get(`http://localhost:5030/api/pastpaper/dynamic-modal/${userId}`);
-    //       console.log('Data received:', response.data);
-    //     } catch (error :any) {
-    //       console.error('Error fetching data:', error.response ? error.response.data : error.message);
-    //     }
-    //   }
-
     const fetchLearnCards = async () => {
         try {
           const response = await axios.get(`http://localhost:5030/api/pastpaper/dynamic-modal/2`, {
@@ -99,32 +61,6 @@ const page = () => {
         }
       };
 
-    // useEffect(() => {
-    //     const fetchLearnCards = async () => {
-    //       try {
-    //         const token = useTokenStore((state) => state.token); 
-    //         const response = await axios.get(`http://localhost:5030/api/pastpaper/dynamic-modal/2`, {
-    //           headers: {
-    //             Authorization: `Bearer ${token}`,
-    //             "Content-Type": "application/json",
-    //           },
-    //         });
-    //         setCards(response.data); 
-    //         console.log("response",response.data);// Update state with fetched data
-    //       } catch (error: any) {
-    //         console.error(
-    //           "Error fetching data:",
-    //           error.response ? error.response.data : error.message
-    //         );
-    //       }
-    //     };
-      
-    //     fetchLearnCards();
-    //   }, []);
-      
-
-// console.log(cards,'cyhgsa');
-    // const {data, isLoading, isError} = useQuery({ queryKey: ['learnCards'], queryFn: fetchLearnCards, enabled: isUserDataCompleted});
 
     useEffect(() => {
             if (isUserDataCompleted) {
