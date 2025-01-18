@@ -17,7 +17,7 @@ const Question = () => {
     // if (allIdsAreSame) {
     //     pastPaperId = pastPapers[0].pastPaperId;
     // }
-        const pastPaperId = pastPapers.length > 0 ? pastPapers[0].pastPaperId : null;
+        const pastPaperId = pastPapers.length > 0 ? pastPapers[0].pastPaperId : "";
 
     const mutation = useMutation({
         mutationFn: async (data: AddToLearningDeck) => {
