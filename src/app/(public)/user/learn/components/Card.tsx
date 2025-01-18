@@ -3,12 +3,33 @@ import React from "react";
 import david from "@/../public/image/david.jpg";
 import { useRouter } from "next/navigation";
 import {LearningDeck} from "@/app/Models/Types";
+import useTokenStore, {useLearningCardStore, usePastPaperStore, useUserDetails} from "@/app/tokenstore";
+import axios from "axios";
 
 const Card : React.FC<LearningDeck> = ({ pastPaperId, title, totalquestions }) => {
   const router = useRouter();
 
-  const handleCardClick = () => {
-    router.push("/user/subject");
+  const token = useTokenStore((state) => state.token);
+  const userId = useUserDetails((state) => state.userId);
+  const setLearningCards = useLearningCardStore((state) => state.setCards);
+
+  const handleCardClick = async () => {
+    try {
+      const {data} = await axios.get(`http://localhost:5030/api/spaced-repetition/ShowQuestionAnswer/${pastPaperId}/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      setLearningCards(data);
+
+      const pastPaper = useLearningCardStore.getState();
+      if (pastPaper) {
+        router.push("/user/subject");
+      }
+    } catch (err: any) {
+      console.error(err);
+    }
   };
   return (
     <div>
