@@ -34,6 +34,19 @@ export interface LearningCard {
   subject: string;
 }
 
+export interface PastPaper{
+    id : number;
+    question: string;
+    answer: string;
+}
+
+export interface PastPaperState {
+    pastPapers: PastPaper[];
+    setPastPapers: (data: PastPaper[]) => void;
+    clearPastPapers: () => void;
+}
+
+
 export interface LearningCardState {
   cards: LearningCard[];
 }
