@@ -58,3 +58,9 @@ export interface AddToLearningDeck{
     addedDate: string;
     nextReviewDate: string;
 }
+
+export interface LearningDeck {
+    pastPaperId: string;
+    title: string;
+    totalquestions: number;
+}
