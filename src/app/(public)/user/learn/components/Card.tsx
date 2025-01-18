@@ -2,8 +2,9 @@ import Image from "next/image";
 import React from "react";
 import david from "@/../public/image/david.jpg";
 import { useRouter } from "next/navigation";
+import {LearningDeck} from "@/app/Models/Types";
 
-const Card = () => {
+const Card : React.FC<LearningDeck> = ({ pastPaperId, title, totalquestions }) => {
   const router = useRouter();
 
   const handleCardClick = () => {
@@ -25,11 +26,11 @@ const Card = () => {
           />
         </div>
         <div className="p-10">
-          <span className="text-[#c350ce]">SEE</span>
-          <p className="text-[#383A42] text-[28px]">Science</p>
+          <input type="hidden" value={pastPaperId}/>
+          <span className="text-[#c350ce]">{title}</span>
+          <p className="text-[#383A42] text-[28px]">Total Questions: {totalquestions}</p>
           <span className="text-[17px] text-[#383A42]">
-            Initiate calls with a click directly from your browser, saving time
-            and enhancing productivity.
+            Do Your Best 🐱‍💻.
           </span>
         </div>
       </div>
