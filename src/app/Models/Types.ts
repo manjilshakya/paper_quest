@@ -51,3 +51,10 @@ export interface PastPaperState {
 export interface LearningCardState {
   cards: LearningCard[];
 }
+export interface AddToLearningDeck{
+    userId: number;
+    pastPaperId: string,
+    status: string;
+    addedDate: string;
+    nextReviewDate: string;
+}
