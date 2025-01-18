@@ -35,6 +35,7 @@ export interface LearningCard {
 }
 
 export interface PastPaper{
+    pastPaperId: string;
     id : number;
     question: string;
     answer: string;
