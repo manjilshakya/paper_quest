@@ -114,7 +114,7 @@ const Question = () => {
               Question paper
             </h1>
             <br />
-            {questions.map(({ id, question, answer }) => (
+            {pastPapers.map(({ id, question, answer }) => (
               <div key={id} style={{ marginBottom: "20px" }}>
                 <h3
                   className=" font-bold"
