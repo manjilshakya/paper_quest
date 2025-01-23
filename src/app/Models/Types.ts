@@ -26,3 +26,53 @@ export interface UserDetailsState {
     phoneNumber: string;
     academicBackground: string;
 }
+
+export interface LearningCard {
+  pastPaperId: string;
+  title: string;
+  year: string;
+  subject: string;
+}
+
+export interface PastPaper{
+    pastPaperId: string;
+    id : number;
+    question: string;
+    answer: string;
+}
+
+export interface PastPaperState {
+    pastPapers: PastPaper[];
+    setPastPapers: (data: PastPaper[]) => void;
+    clearPastPapers: () => void;
+}
+
+
+export interface LearningCardState {
+  cards: LearningCard[];
+}
+export interface AddToLearningDeck{
+    userId: number;
+    pastPaperId: string,
+    status: string;
+    addedDate: string;
+    nextReviewDate: string;
+}
+
+export interface LearningDeck {
+    pastPaperId: string;
+    title: string;
+    totalquestions: number;
+}
+
+export interface SpacedRepetitionCard {
+    question_number : number;
+    question: string;
+    answer: string;
+    score: number;
+}
+
+export interface SpacedRepetitionCardState {
+    Cards: SpacedRepetitionCard[];
+    setCards: (data: SpacedRepetitionCard[]) => void;
+}

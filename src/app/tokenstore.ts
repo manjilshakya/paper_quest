@@ -1,6 +1,13 @@
 ﻿import { devtools, persist } from "zustand/middleware";
 import {create} from "zustand/react";
-import { UserData, UserDetailsState } from "./Models/Types";
+import {
+    PastPaper,
+    PastPaperState,
+    SpacedRepetitionCard,
+    SpacedRepetitionCardState,
+    UserData,
+    UserDetailsState
+} from "./Models/Types";
 
 export interface Tokenstore{
     token: string;
@@ -43,6 +50,17 @@ export const useUserDetails = create<UserDetailsState>((set) => ({
         isUserDataComplete: false,
       }),
   }));
+
+export const usePastPaperStore = create<PastPaperState>((set) => ({
+    pastPapers: [],
+    setPastPapers: (data: PastPaper[]) => set({ pastPapers: data }),
+    clearPastPapers: () => set({ pastPapers: [] }),
+}));
+
+export const useLearningCardStore = create<SpacedRepetitionCardState>((set) => ({
+    Cards: [],
+    setCards: (data: SpacedRepetitionCard[]) => set({ Cards: data }),
+}));
 
 
 export default useTokenStore;

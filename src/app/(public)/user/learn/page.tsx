@@ -1,6 +1,6 @@
 "use client";
 import { Button, Progress } from "antd";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import jsPDF from "jspdf";
 import Chat from "./components/chat";
 import Image from "next/image";
@@ -8,11 +8,41 @@ import PQ from "../../../../../public/image/Paperbanner.png";
 import ReactCardFlip from "react-card-flip";
 import Card from "./components/Card";
 import Chats from "./components/chats";
+import useTokenStore, {useUserDetails} from "@/app/tokenstore";
+import axios from "axios";
+import {LearningDeck} from "@/app/Models/Types";
 
 const page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
   const [currentCard, setCurrentCard] = useState({ question: "", answer: "" });
+
+  const [learningDeck, setLearningDeck] = useState([]);
+
+  const token = useTokenStore((state) => state.token);
+  const userId = useUserDetails((state) => state.userId);
+
+  useEffect(() => {
+    const fetchLearningDeck = async () => {
+      try {
+        const response = await axios.get(
+            `http://localhost:5030/api/spaced-repetition/GetLearningDeck/${userId}`,
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+        );
+
+        setLearningDeck(response.data);
+      } catch (error) {
+        console.error("Error fetching learning deck:", error);
+      }
+    };
+
+    fetchLearningDeck();
+  }, [userId, token]);
 
   const cards = [
     {
@@ -197,19 +227,20 @@ const page = () => {
           </div>
         </div> */}
         <div className="mt-6 flex flex-wrap gap-6 item-center justify-center">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {learningDeck.map((item : LearningDeck) => (
+              <Card
+                  key={item.pastPaperId}
+                  pastPaperId={item.pastPaperId}
+                  title={item.title}
+                  totalquestions={item.totalquestions}
+              />
+          ))}
         </div>
       </div>
-      <div className="flex gap-5">
+      {/* <div className="flex gap-5">
         <Chat />
         <Chats />
-      </div>
+      </div> */}
     </div>
   );
 };
