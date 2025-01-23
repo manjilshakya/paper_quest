@@ -111,6 +111,7 @@ const page = () => {
     mutation.mutate(data);
     fetchLearnCards();
   };
+  console.log("hello");
 
   const closeModal = () => setModalOpen(false);
   return (
